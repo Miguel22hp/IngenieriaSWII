@@ -1,0 +1,38 @@
+# Directorios generados por IntelliJ IDEA
+.idea/
+
+# Directorio de salida de compilación
+out/
+
+# Directorio de archivos compilados
+target/
+
+# Archivos de configuración específicos de IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Archivos de registro y directorios
+*.log
+logs/
+
+# Directorio de archivos de respaldo
+*~
+
+# Dependencias y archivos generados por Maven
+target/
+.idea/
+*.iml
+*.iws
+
+# Dependencias y archivos generados por Gradle
+.gradle/
+build/
+
+# Archivos de configuración de Eclipse
+.settings/
+
+# Archivos de configuración de NetBeans
+nb-configuration.xml
+build/
