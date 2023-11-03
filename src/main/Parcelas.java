@@ -1,28 +1,22 @@
 package main;
 public class Parcelas 
 {
-    int id_parcela;
-    int id_terreno;
-    Ubicacion limites[];
+    int idParcela;
+    int idTerreno;
+    Ubicacion[] limites;
     Ubicacion ubicacion;
 
-    public Parcelas(int id_parcela, int id_terreno, Ubicacion[] limites, Ubicacion ubicacion) {
-        this.id_terreno = id_terreno;
-        this.id_parcela = id_parcela;
+    public Parcelas(int idParcela, int idTerreno, Ubicacion[] limites, Ubicacion ubicacion) {
+        this.idTerreno = idTerreno;
+        this.idParcela = idParcela;
         this.limites = limites;
         this.ubicacion = ubicacion;
     }
-    public int getId_parcela() {
-        return id_parcela;
+    public int getIdParcela() {
+        return idParcela;
     }
-    public void setId_parcela(int id_parcela) {
-        this.id_parcela = id_parcela;
-    }
-    public int getId_terreno() {
-        return id_terreno;
-    }
-    public void setId_terreno(int id_terreno) {
-        this.id_terreno = id_terreno;
+    public int getIdTerreno() {
+        return idTerreno;
     }
     public Ubicacion[] getLimites() {
         return limites;

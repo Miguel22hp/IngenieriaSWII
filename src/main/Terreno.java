@@ -1,26 +1,27 @@
 package main;
 import main.Ubicacion;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Terreno 
 {
     int id;
     int tamano;
-    Ubicacion limites[];
+    Ubicacion[] limites;
     Ubicacion ubicacion;
-    Parcelas parcelasTerreno[];
+    HashMap<Integer, Parcelas> parcelasTerreno;
     
-    public Terreno(int id, int tamano, Ubicacion[] limites, Ubicacion ubicacion, Parcelas[] parcelasTerreno) {
+    public Terreno(int id, int tamano, Ubicacion[] limites, Ubicacion ubicacion) {
         this.id = id;
         this.tamano = tamano;
         this.limites = limites;
         this.ubicacion = ubicacion;
-        this.parcelasTerreno = parcelasTerreno;
+        this.parcelasTerreno = new HashMap<>();
+        // creates the hashmaps where the parcelas of a terreno are kept
     }
     public int getId() {
         return id;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
     public int getTamano() {
         return tamano;
@@ -40,11 +41,24 @@ public class Terreno
     public void setUbicacion(Ubicacion ubicacion) {
         this.ubicacion = ubicacion;
     }
-    public Parcelas[] getParcelasTerreno() {
+    public Map<Integer, Parcelas> getParcelasTerreno() {
         return parcelasTerreno;
     }
-    public void setParcelasTerreno(Parcelas[] parcelasTerreno) {
-        this.parcelasTerreno = parcelasTerreno;
+    public void setParcelasTerreno(Map<Integer,Parcelas> parcelasTerreno) {
+        this.parcelasTerreno = (HashMap<Integer, Parcelas>) parcelasTerreno;
+    }
+
+    public void addParcela(Parcelas parcela){
+        parcelasTerreno.put(parcela.getIdParcela(), parcela);
+    }
+
+    public int borrarParcela(int idParcela)
+    {
+        Parcelas borrado = parcelasTerreno.remove(idParcela);
+        if(borrado == null)
+            return  -2;
+        else
+            return 0;
     }
 
 
