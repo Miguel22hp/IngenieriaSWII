@@ -1,6 +1,7 @@
 package main;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Aplicacion {
 
@@ -113,5 +114,39 @@ public class Aplicacion {
     }
 
     //TODO: Get para los param, hacer de forma similar a los mod
+    public Object[] getTerreno(int[] elementosMod, int idTerreno)
+    {
+        Object[] e = new Object[3];
+        Terreno terreno = listaTerrenos.get(idTerreno);
+        if(elementosMod[0] == 0) //Want to get tamaño
+        {
+            e[0] = terreno.getTamano();
+        }
+
+        if(elementosMod[1] == 0) //Want to get limites
+        {
+            e[1] = terreno.getLimites();
+        }
+
+        if(elementosMod[2] == 0) //Want to get ubication
+        {
+            e[2] = terreno.getUbicacion();
+        }
+
+        return e;
+    }
+
+    public Object[] getParcela(int[] elementosMod, int idParcela)
+    {
+        Parcelas parcelas = listaParcelas.get(idParcela);
+        Object[] e = new Object[3];
+         if(elementosMod[0] == 0) //Want to get limites
+             e[0] = parcelas.getLimites();
+
+        if(elementosMod[1] == 0) //Want to get ubication
+            e[1] = parcelas.getUbicacion();
+
+        return e;
+    }
 
 }
