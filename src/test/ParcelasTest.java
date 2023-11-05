@@ -36,4 +36,13 @@ public class ParcelasTest {
         assertEquals(new Ubicacion(2,3), parcela1.getUbicacion());
     }
 
+    @Test
+    public void testSetters() {
+        parcela2.setUbicacion(new Ubicacion(3,4));
+        parcela2.setLimites(new Ubicacion[]{new Ubicacion(1, 1), new Ubicacion(1, 5), new Ubicacion(5, 3)});
+        assertEquals(new Ubicacion(3,4), parcela2.getUbicacion());
+        assertArrayEquals(new Ubicacion[]{new Ubicacion(1, 1), new Ubicacion(1, 5), new Ubicacion(5, 3)},
+                parcela2.getLimites());
+    }
+
 }
