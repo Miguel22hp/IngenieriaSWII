@@ -113,7 +113,6 @@ public class Aplicacion {
         ter.addParcela(parcelas); // Al hacer un put sobre un elemento ya existente lo sobreescribe
     }
 
-    //TODO: Get para los param, hacer de forma similar a los mod
     public Object[] getTerreno(int[] elementosMod, int idTerreno)
     {
         Object[] e = new Object[3];

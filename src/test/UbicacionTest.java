@@ -1,3 +1,4 @@
+package test;
 
 import main.Ubicacion;
 import org.junit.Test;
