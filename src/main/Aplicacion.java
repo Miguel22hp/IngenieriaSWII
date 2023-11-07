@@ -15,42 +15,6 @@ public class Aplicacion {
         return listaTerrenos;
     }
 
-    public void setListaTerrenos(HashMap<Integer, Terreno> listaTerrenos) {
-        this.listaTerrenos = listaTerrenos;
-    }
-
-    public HashMap<Integer, Parcelas> getListaParcelas() {
-        return listaParcelas;
-    }
-
-    public void setListaParcelas(HashMap<Integer, Parcelas> listaParcelas) {
-        this.listaParcelas = listaParcelas;
-    }
-
-    public HashMap<Integer, Arrendatario> getListaArrendatarios() {
-        return listaArrendatarios;
-    }
-
-    public void setListaArrendatarios(HashMap<Integer, Arrendatario> listaArrendatarios) {
-        this.listaArrendatarios = listaArrendatarios;
-    }
-
-    public int getIdTerrenos() {
-        return idTerrenos;
-    }
-
-    public void setIdTerrenos(int idTerrenos) {
-        this.idTerrenos = idTerrenos;
-    }
-
-    public int getIdParcela() {
-        return idParcela;
-    }
-
-    public void setIdParcela(int idParcela) {
-        this.idParcela = idParcela;
-    }
-
     public Aplicacion()
     {
         this.listaTerrenos = new HashMap<>();
@@ -109,7 +73,7 @@ public class Aplicacion {
      * @param elementosMod is an array of integers that has 3 positions,
      *                     and has a 0 on the param he wants to modify and a 1
      *                     in the elements he doesn't want to modify
-     * @param tamano an int with a number or null if you want to modyfy or not
+     * @param tamano an int with a number or -1 if you want to modyfy or not
      * @param limites an array of Ubicacion or null  if you want to modyfy or not
      * @param ubi an Ubication or null  if you want to modyfy or not
      * @param idTerreno the id of the Terreno you want to modify
@@ -157,19 +121,19 @@ public class Aplicacion {
         Object[] e = new Object[3];
         Terreno terreno = listaTerrenos.get(idTerreno);
         if(elementosMod[0] == 0) //Want to get tamaño
-        {
             e[0] = terreno.getTamano();
-        }
+        else
+            e[0] = null;
 
         if(elementosMod[1] == 0) //Want to get limites
-        {
             e[1] = terreno.getLimites();
-        }
+        else
+            e[1] = null;
 
         if(elementosMod[2] == 0) //Want to get ubication
-        {
             e[2] = terreno.getUbicacion();
-        }
+        else
+            e[2] = null;
 
         return e;
     }
@@ -180,9 +144,13 @@ public class Aplicacion {
         Object[] e = new Object[3];
          if(elementosMod[0] == 0) //Want to get limites
              e[0] = parcelas.getLimites();
+         else
+            e[0] = null;
 
         if(elementosMod[1] == 0) //Want to get ubication
             e[1] = parcelas.getUbicacion();
+        else
+            e[1] = null;
 
         return e;
     }
