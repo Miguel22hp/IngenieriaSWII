@@ -11,29 +11,68 @@ public class Aplicacion {
     private int idTerrenos;
     private int idParcela;
 
+    public HashMap<Integer, Terreno> getListaTerrenos() {
+        return listaTerrenos;
+    }
+
+    public void setListaTerrenos(HashMap<Integer, Terreno> listaTerrenos) {
+        this.listaTerrenos = listaTerrenos;
+    }
+
+    public HashMap<Integer, Parcelas> getListaParcelas() {
+        return listaParcelas;
+    }
+
+    public void setListaParcelas(HashMap<Integer, Parcelas> listaParcelas) {
+        this.listaParcelas = listaParcelas;
+    }
+
+    public HashMap<Integer, Arrendatario> getListaArrendatarios() {
+        return listaArrendatarios;
+    }
+
+    public void setListaArrendatarios(HashMap<Integer, Arrendatario> listaArrendatarios) {
+        this.listaArrendatarios = listaArrendatarios;
+    }
+
+    public int getIdTerrenos() {
+        return idTerrenos;
+    }
+
+    public void setIdTerrenos(int idTerrenos) {
+        this.idTerrenos = idTerrenos;
+    }
+
+    public int getIdParcela() {
+        return idParcela;
+    }
+
+    public void setIdParcela(int idParcela) {
+        this.idParcela = idParcela;
+    }
+
     public Aplicacion()
     {
         this.listaTerrenos = new HashMap<>();
         this.listaParcelas = new HashMap<>();
         this.listaArrendatarios = new HashMap<>();
-        this.idTerrenos = 0;
-        this.idParcela = 0;
+        this.idTerrenos = 1;
+        this.idParcela = 1;
     }
 
     public void addTerreno(int tamano, Ubicacion[] limites, Ubicacion ubi)
     {
         Terreno terreno = new Terreno(idTerrenos,tamano,limites,ubi);
-        idTerrenos++;
         listaTerrenos.put(idTerrenos,terreno);
+        idTerrenos++;
     }
 
-    public void addParcela(int idTerreno, Ubicacion[] limites, Ubicacion ubi)
-    {
+    public void addParcela(int idTerreno, Ubicacion[] limites, Ubicacion ubi) throws NoTerrenoException {
         Parcelas parcelas = new Parcelas(idParcela, idTerreno, limites, ubi);
         Terreno terreno = listaTerrenos.get(idTerreno);
         if(terreno == null) //Cuando el terreno que se quiere añadir no existe
         {
-            //TODO: Salte un error
+            throw new NoTerrenoException("No existe Terreno al que pertenece la parcela");
         }
         else
         {
