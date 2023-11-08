@@ -132,8 +132,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modTerrenoTamano()
-    {
+    public void modTerrenoTamano() throws NoTerrenoException {
         //Modifica tamaño terreno
         HashMap<Integer,Terreno> expectedListaTerrenos = new HashMap<>();
         expectedListaTerrenos.put(1,new Terreno(1,141,
@@ -185,8 +184,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modTerrenoLimitesYUbicacion()
-    {
+    public void modTerrenoLimitesYUbicacion() throws NoTerrenoException {
         //Modifica tamaño terreno
         HashMap<Integer,Terreno> expectedListaTerrenos = new HashMap<>();
         expectedListaTerrenos.put(1,new Terreno(1,144,
@@ -404,6 +402,8 @@ public class AplicacionTest {
         assertNull(o[0]);
         assertEquals(new Ubicacion(13, 13), o[1]);
     }
+
+    //TODO:Comprobar que saltan las nuevas excepciones
 
 
 }

@@ -92,7 +92,10 @@ public class Main {
             System.out.println("Modificar Datos Parcela: 4");
             System.out.println("Obtener Datos Terreno: 5");
             System.out.println("Obtener Datos Parcela: 6");
+            System.out.println("Borrar un Terreno: 7");
+            System.out.println("Borrar una Parcela: 8");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
+
             int operacionSeleccionada = in.nextInt();
 
             switch (operacionSeleccionada)
@@ -131,6 +134,15 @@ public class Main {
                     verParcelas(aplicacion);
                     break;
 
+                case 7:
+                    System.out.println("Borrar un Terreno: 7");
+                    borrarTerreno(aplicacion);
+                    break;
+                case 8:
+                    System.out.println("Borrar una Parcela: 8");
+                    borrarParcela(aplicacion);
+                    break;
+
                 default:
                     System.out.println("No hay operación asociadan");
             }
@@ -141,6 +153,28 @@ public class Main {
         }
 
         
+    }
+
+    private static void borrarParcela(Aplicacion aplicacion) {
+        System.out.println("Seleccionar el identificador de la parcela que quieres borrar");
+        System.out.print("\tId de la parcela:");
+        int idParcela = in.nextInt();
+        int res = aplicacion.removeParcela(idParcela);
+        if(res == -1)
+            System.out.println("No existe parcela con ese id");
+        else
+            System.out.println("Parcela borrado");
+    }
+
+    private static void borrarTerreno(Aplicacion aplicacion) {
+        System.out.println("Seleccionar el identificador del terreno que quieres borrar");
+        System.out.print("\tId del terreno:");
+        int idTerreno = in.nextInt();
+        int res = aplicacion.removeTerreno(idTerreno);
+        if(res == -1)
+            System.out.println("No existe terreno con ese id");
+        else
+            System.out.println("Terreno borrado");
     }
 
     private static void anadirParcela(Aplicacion aplicacion) {
@@ -236,7 +270,7 @@ public class Main {
 
     }
 
-    private static void verParcelas(Aplicacion aplicacion) {
+    private static void verParcelas(Aplicacion aplicacion){
         System.out.println("Seleccionar el identificador de la parcela. Si se escribe 0 se muestra el " +
                 "de todas las parcelas en el sistema. Sino seleccionar el identificador de la parcela que buscas");
         System.out.print("\tId de la parcela:");
@@ -439,12 +473,13 @@ public class Main {
 
 
         int[] array = {tamanoM,limitesM,ubicacionM};
-        aplicacion.modTerreno(array, tamano, limites, ubicacion, idTerreno);
 
+        try {
+            aplicacion.modTerreno(array, tamano, limites, ubicacion, idTerreno);
+        }catch (NoTerrenoException e) {
+            System.out.println("No existe terreno con ese id");
+        }
 
-        //TODO:
-        //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
-        //Fallo de código detectado durante código
     }
     
     

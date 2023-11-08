@@ -1,7 +1,6 @@
 package main;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Aplicacion {
 
@@ -72,6 +71,7 @@ public class Aplicacion {
         }
     }
 
+
     /**
      * This method allows us to modify a param of a Terreno
      * @param elementosMod is an array of integers that has 3 positions,
@@ -81,11 +81,15 @@ public class Aplicacion {
      * @param limites an array of Ubicacion or null  if you want to modyfy or not
      * @param ubi an Ubication or null  if you want to modyfy or not
      * @param idTerreno the id of the Terreno you want to modify
+     * @throws NoTerrenoException if there is not a Terreno with that id
      */
     public  void modTerreno(int[] elementosMod, int tamano,
-                            Ubicacion[] limites, Ubicacion ubi, int idTerreno)
-    {
+                            Ubicacion[] limites, Ubicacion ubi, int idTerreno) throws NoTerrenoException {
         Terreno terreno = listaTerrenos.get(idTerreno);
+        if(terreno == null) //Cuando el terreno que se quiere añadir no existe
+        {
+            throw new NoTerrenoException("No existe Terreno al que pertenece la parcela");
+        }
         if(elementosMod[0] == 0) //Want to modify tamaño
             terreno.setTamano(tamano);
 
@@ -109,6 +113,10 @@ public class Aplicacion {
                            Ubicacion ubi, int idParcela)
     {
         Parcelas parcelas = listaParcelas.get(idParcela);
+        if(parcelas == null)
+        {
+            //TODO:NoParcelaException
+        }
 
          if(elementosMod[0] == 0) //Want to modify limites
              parcelas.setLimites(limites);
@@ -124,6 +132,10 @@ public class Aplicacion {
     {
         Object[] e = new Object[3];
         Terreno terreno = listaTerrenos.get(idTerreno);
+        if(terreno == null) //Cuando el terreno que se quiere añadir no existe
+        {
+            //throw new NoTerrenoException("");
+        }
         if(elementosMod[0] == 0) //Want to get tamaño
             e[0] = terreno.getTamano();
         else
@@ -145,6 +157,10 @@ public class Aplicacion {
     public Object[] getParcela(int[] elementosMod, int idParcela)
     {
         Parcelas parcelas = listaParcelas.get(idParcela);
+        if(parcelas == null)
+        {
+            //TODO:NoParcelaException
+        }
         Object[] e = new Object[3];
          if(elementosMod[0] == 0) //Want to get limites
              e[0] = parcelas.getLimites();
