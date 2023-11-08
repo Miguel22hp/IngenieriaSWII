@@ -41,9 +41,18 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws NoTerrenoException {
-        Aplicacion aplicacion = new Aplicacion();
+    public static void modificarTerrenosYParcelas(Aplicacion aplicacion)
+    {
+        System.out.println("-----Modifican datos de terreno con id = 1 y parcela con id = 1------------------");
+        int[] mod = {0,0,0};
+        aplicacion.modTerreno(mod,145,new Ubicacion[]{new Ubicacion(12,11), new Ubicacion(12,24),
+                new Ubicacion(24,12),new Ubicacion(24,23)}, new Ubicacion(18,17), 1);
+        int[] mod2 = {0,0};
+        aplicacion.modParcela(mod2,new Ubicacion[]{new Ubicacion(12,12), new Ubicacion(12,16),
+                new Ubicacion(14,12), new Ubicacion(14,16)}, new Ubicacion(13,14), 1);
+    }
 
+    public static void añadirTerrenosYParcelas(Aplicacion aplicacion) throws NoTerrenoException {
         aplicacion.addTerreno(144,
                 new Ubicacion[]{new Ubicacion(12, 12), new Ubicacion(12, 24), new Ubicacion(24, 12),
                         new Ubicacion(24, 24)}
@@ -65,6 +74,19 @@ public class Main {
 
         aplicacion.addParcela(1,new Ubicacion[]{new Ubicacion(15, 15), new Ubicacion(15, 19),
                 new Ubicacion(15, 19), new Ubicacion(19, 19)}, new Ubicacion(17, 17));
+    }
+
+    public static void main(String[] args) throws NoTerrenoException {
+        Aplicacion aplicacion = new Aplicacion();
+
+        //Añaden los terrenos y parcelas
+        añadirTerrenosYParcelas(aplicacion);
+
+        //Ver las parcelas de los terrenos
+        visorTerrenosYParcelas(aplicacion);
+
+        //Modifican terreno id = 1 y parcela con id = 1
+        modificarTerrenosYParcelas(aplicacion);
 
         //Ver las parcelas de los terrenos
         visorTerrenosYParcelas(aplicacion);
