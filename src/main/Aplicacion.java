@@ -15,6 +15,10 @@ public class Aplicacion {
         return listaTerrenos;
     }
 
+    public HashMap<Integer, Parcelas> getListaParcelas() {
+        return listaParcelas;
+    }
+
     public Aplicacion()
     {
         this.listaTerrenos = new HashMap<>();
