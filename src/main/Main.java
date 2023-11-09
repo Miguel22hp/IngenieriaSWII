@@ -6,7 +6,7 @@ public class Main {
 
     static java.util.Scanner in;
 
-    public static void visorTerrenosYParcelas(Aplicacion aplicacion)
+    /*public static void visorTerrenosYParcelas(Aplicacion aplicacion)
     {
         //Ver las parcelas de los terrenos
         for(Map.Entry<Integer,Terreno> entry: aplicacion.getListaTerrenos().entrySet())
@@ -41,7 +41,7 @@ public class Main {
             }
             System.out.println("---------------Fin de datos de terreno con id = " + idTerreno + " ------------------");
         }
-    }
+    }*/
 
     /*
     public static void modificarTerrenosYParcelas(Aplicacion aplicacion)
@@ -206,10 +206,10 @@ public class Main {
         }
 
         try {
-            aplicacion.addParcela(idTerreno, limites, ubicacion); //Cambiar el método para que devuelva el identificador.
+            int idParcela = aplicacion.addParcela(idTerreno, limites, ubicacion); //Cambiar el método para que devuelva el identificador.
                                                                     // Interesante para hacer get y set a futuro. Añadir a defectos
                                                                     // diseño. Corregir en Aplicacion, AplicacionTest.
-
+            System.out.println("El identificador de la parcela creada es "+ idParcela);
             //System.out.println("El identificador de la parcela creada es ");
         }catch (NoTerrenoException e)
         {
@@ -262,15 +262,20 @@ public class Main {
 
 
         int[] array = {limitesM,ubicacionM};
-        aplicacion.modParcela(array, limites, ubicacion, idTerreno);
-        //TODO:
+        try {
+            aplicacion.modParcela(array, limites, ubicacion, idTerreno);
+        }catch (NoParcelaException e)
+        {
+            System.out.println("No existe parcela con tal identificador");
+        }
+
         //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
         //Fallo de código detectado durante código
 
 
     }
 
-    private static void verParcelas(Aplicacion aplicacion){
+    private static void verParcelas(Aplicacion aplicacion) {
         System.out.println("Seleccionar el identificador de la parcela. Si se escribe 0 se muestra el " +
                 "de todas las parcelas en el sistema. Sino seleccionar el identificador de la parcela que buscas");
         System.out.print("\tId de la parcela:");
@@ -290,42 +295,47 @@ public class Main {
             {
                 int idParcela2 = entry.getKey();
                 System.out.println("---------------Datos de parcela con id = " + idParcela2 + " ------------------");
-                //TODO:
-                //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
-                //Fallo de código detectado durante código
-                Object[] datosParcela = aplicacion.getParcela(array, idParcela2);
-                if(datosParcela[1] != null)
-                    System.out.println("-> Ubicación = " + datosParcela[1].toString());
-                if(datosParcela[0] != null) {
-                     Ubicacion[] limites2 = (Ubicacion[]) datosParcela[0];
-                     System.out.print("-> Limites = [");
-                     for (int i = 0; i < limites2.length; i++)
-                         System.out.print(limites2[i].toString());
-                     System.out.println("]");
+                try {
+                    Object[] datosParcela = aplicacion.getParcela(array, idParcela2);
+                    if (datosParcela[1] != null)
+                        System.out.println("-> Ubicación = " + datosParcela[1].toString());
+                    if (datosParcela[0] != null) {
+                        Ubicacion[] limites2 = (Ubicacion[]) datosParcela[0];
+                        System.out.print("-> Limites = [");
+                        for (int i = 0; i < limites2.length; i++)
+                            System.out.print(limites2[i].toString());
+                        System.out.println("]");
+                    }
+                    System.out.println("---------------Fin de datos de terreno con id = " + idParcela2 + " ------------------");
+                }catch (NoParcelaException e) {
+                    System.out.println("No existe parcela con tal identificador");
                 }
-                System.out.println("---------------Fin de datos de terreno con id = " + idParcela2 + " ------------------");
             }
         }
         else
         {
             //TODO:
             //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
-            Object[] datosParcela = aplicacion.getParcela(array, idParcela); //Obtienes los datos. Debería de cazarse una excepción
-            System.out.println("---------------Datos de terreno con id = " + idParcela + " ------------------");
-                if(datosParcela[1] != null)
+            try {
+                Object[] datosParcela = aplicacion.getParcela(array, idParcela); //Obtienes los datos. Debería de cazarse una excepción
+                System.out.println("---------------Datos de terreno con id = " + idParcela + " ------------------");
+                if (datosParcela[1] != null)
                     System.out.println("-> Ubicación = " + datosParcela[1].toString());
-                if(datosParcela[0] != null) {
-                     Ubicacion[] limites2 = (Ubicacion[]) datosParcela[0];
-                     System.out.print("-> Limites = [");
-                     for (int i = 0; i < limites2.length; i++)
-                         System.out.print(limites2[i].toString());
-                     System.out.println("]");
+                if (datosParcela[0] != null) {
+                    Ubicacion[] limites2 = (Ubicacion[]) datosParcela[0];
+                    System.out.print("-> Limites = [");
+                    for (int i = 0; i < limites2.length; i++)
+                        System.out.print(limites2[i].toString());
+                    System.out.println("]");
                 }
                 System.out.println("---------------Fin de datos de terreno con id = " + idParcela + " ------------------");
+            }catch (NoParcelaException e) {
+                System.out.println("No existe parcela con tal identificador");
+            }
         }
     }
 
-    private static void verTerrenos(Aplicacion aplicacion) {
+    private static void verTerrenos(Aplicacion aplicacion) throws NoTerrenoException {
         System.out.println("Seleccionar el identificador del terreno. Si se escribe 0 se muestra el " +
                 "de todos los terrenos en el sistema. Sino seleccionar el identificador del terreno que buscas");
         System.out.print("\tId del terreno:");
@@ -342,46 +352,48 @@ public class Main {
 
         if(idTerreno == 0) //Si se quieren ver todos los terrenos
         {
-            for(Map.Entry<Integer,Terreno> entry: aplicacion.getListaTerrenos().entrySet())
-            {
+            for(Map.Entry<Integer,Terreno> entry: aplicacion.getListaTerrenos().entrySet()) {
                 int idTerreno2 = entry.getKey();
                 System.out.println("---------------Datos de terreno con id = " + idTerreno2 + " ------------------");
-                //TODO:
-                //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
-                //Fallo de código detectado durante código
+                try{
                 Object[] datosTerreno = aplicacion.getTerreno(array, idTerreno2);
-                if(datosTerreno[0] != null)
+                if (datosTerreno[0] != null)
                     System.out.println("-> Tamaño = " + datosTerreno[0]);
-                if(datosTerreno[2] != null)
+                if (datosTerreno[2] != null)
                     System.out.println("-> Ubicación = " + datosTerreno[2].toString());
-                if(datosTerreno[1] != null) {
-                     Ubicacion[] limites2 = (Ubicacion[]) datosTerreno[1];
-                     System.out.print("-> Limites = [");
-                     for (int i = 0; i < limites2.length; i++)
-                         System.out.print(limites2[i].toString());
-                     System.out.println("]");
+                if (datosTerreno[1] != null) {
+                    Ubicacion[] limites2 = (Ubicacion[]) datosTerreno[1];
+                    System.out.print("-> Limites = [");
+                    for (int i = 0; i < limites2.length; i++)
+                        System.out.print(limites2[i].toString());
+                    System.out.println("]");
                 }
                 System.out.println("---------------Fin de datos de terreno con id = " + idTerreno2 + " ------------------");
+                }catch (NoTerrenoException e){
+                    System.out.println("No existe terreno con ese id");
+                }
             }
         }
         else
         {
-            //TODO:
-            //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
-            Object[] datosTerreno = aplicacion.getTerreno(array, idTerreno); //Obtienes los datos. Debería de cazarse una excepción
-            System.out.println("---------------Datos de terreno con id = " + idTerreno + " ------------------");
-            if(datosTerreno[0] != null)
+            try {
+                Object[] datosTerreno = aplicacion.getTerreno(array, idTerreno); //Obtienes los datos.
+                System.out.println("---------------Datos de terreno con id = " + idTerreno + " ------------------");
+                if (datosTerreno[0] != null)
                     System.out.println("-> Tamaño = " + datosTerreno[0]);
-                if(datosTerreno[2] != null)
+                if (datosTerreno[2] != null)
                     System.out.println("-> Ubicación = " + datosTerreno[2].toString());
-                if(datosTerreno[1] != null) {
-                     Ubicacion[] limites2 = (Ubicacion[]) datosTerreno[1];
-                     System.out.print("-> Limites = [");
-                     for (int i = 0; i < limites2.length; i++)
-                         System.out.print(limites2[i].toString());
-                     System.out.println("]");
+                if (datosTerreno[1] != null) {
+                    Ubicacion[] limites2 = (Ubicacion[]) datosTerreno[1];
+                    System.out.print("-> Limites = [");
+                    for (int i = 0; i < limites2.length; i++)
+                        System.out.print(limites2[i].toString());
+                    System.out.println("]");
                 }
                 System.out.println("---------------Fin de datos de terreno con id = " + idTerreno + " ------------------");
+            }catch (NoTerrenoException e){
+                System.out.println("No existe terreno con ese id");
+            }
         }
 
     }
@@ -414,10 +426,10 @@ public class Main {
             limites[i] = ubicacion;
         }
 
-        aplicacion.addTerreno(tamano,limites,ubicacion); //Cambiar el método para que devuelva el identificador.
+        int idTerreno = aplicacion.addTerreno(tamano,limites,ubicacion); //Cambiar el método para que devuelva el identificador.
                                                          // Interesante para hacer get y set a futuro. Añadir a defectos
                                                         // diseño. Corregir en Aplicacion, AplicacionTest.
-
+        System.out.println("El identificador del terreno creado es "+ idTerreno);
     }
 
     private static void modificarTerrenos(Aplicacion aplicacion) {

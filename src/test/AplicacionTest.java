@@ -28,6 +28,43 @@ public class AplicacionTest {
     }
 
     @Test
+    public void addTerrenoReturn() throws NoTerrenoException {
+        int resultado = aplicacion.addTerreno(200,
+                new Ubicacion[]{new Ubicacion(10, 10), new Ubicacion(10, 20), new Ubicacion(20, 10),
+                        new Ubicacion(20, 20)},
+                new Ubicacion(15, 15));
+        int resultado2 = aplicacion.addTerreno(99,
+                new Ubicacion[]{new Ubicacion(10, 10), new Ubicacion(10, 20), new Ubicacion(20, 10),
+                        new Ubicacion(20, 20)},
+                new Ubicacion(15, 15));
+
+        assertEquals(3, resultado);
+        assertEquals(4, resultado2);
+    }
+
+    @Test
+public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
+
+
+    int resultado = aplicacion.addParcela(1,
+            new Ubicacion[]{new Ubicacion(12, 12), new Ubicacion(12, 14),
+                    new Ubicacion(14, 12), new Ubicacion(14, 14)},
+            new Ubicacion(13, 13));
+    int resultado2 = aplicacion.addParcela(1,
+            new Ubicacion[]{new Ubicacion(12, 12), new Ubicacion(12, 14),
+                    new Ubicacion(14, 12), new Ubicacion(14, 14)},
+            new Ubicacion(13, 13));
+    int resultado3 = aplicacion.addParcela(2,
+            new Ubicacion[]{new Ubicacion(12, 12), new Ubicacion(12, 14),
+                    new Ubicacion(14, 12), new Ubicacion(14, 14)},
+            new Ubicacion(13, 13));
+
+    assertEquals(2, resultado);
+    assertEquals(3, resultado2);
+    assertEquals(4, resultado3);
+}
+
+    @Test
     public void addTerrenoYParcela()
     {
         HashMap<Integer,Terreno> expectedListaTerrenos = new HashMap<>();
@@ -237,8 +274,15 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modParcelas()
+    public  void modTerrenoNoExistente()
     {
+        assertThrows(NoTerrenoException.class, () -> {
+            aplicacion.modTerreno(new int[]{1,1,1},-1,null, null, 9);
+        });
+    }
+
+    @Test
+    public void modParcelas() throws NoParcelaException {
         //Modifica tamaño terreno
         HashMap<Integer,Terreno> expectedListaTerrenos = new HashMap<>();
         expectedListaTerrenos.put(1,new Terreno(1,144,
@@ -254,6 +298,7 @@ public class AplicacionTest {
 
         //Modificacion terrenos almacenados por app
         int[] mod = {0,0};
+
         aplicacion.modParcela(mod,new Ubicacion[]{new Ubicacion(12,12), new Ubicacion(12,14),
                 new Ubicacion(14,12), new Ubicacion(14,16)}, new Ubicacion(12,14), 1);
 
@@ -291,8 +336,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modParcelasUnParametro()
-    {
+    public void modParcelasUnParametro() throws NoParcelaException {
         //Modifica tamaño terreno
         HashMap<Integer, Terreno> expectedListaTerrenos = new HashMap<>();
         expectedListaTerrenos.put(1, new Terreno(1, 144,
@@ -308,6 +352,7 @@ public class AplicacionTest {
 
         //Modificacion terrenos almacenados por app
         int[] mod = {0, 1};
+
         aplicacion.modParcela(mod, new Ubicacion[]{new Ubicacion(12, 12), new Ubicacion(12, 14),
                 new Ubicacion(14, 12), new Ubicacion(14, 16)}, null, 1);
 
@@ -343,8 +388,16 @@ public class AplicacionTest {
     }
 
     @Test
-    public void getTerrenoTodosDatos()
+    public  void modParcelaNoExistente()
     {
+        assertThrows(NoParcelaException.class, () -> {
+            aplicacion.modParcela(new int[]{1,1},null, null, 4);
+        });
+    }
+
+
+    @Test
+    public void getTerrenoTodosDatos() throws NoTerrenoException {
         int[] elementosADevolver = {0,0,0};
         Object[] o = aplicacion.getTerreno(elementosADevolver,1);
         assertEquals(144, o[0]);
@@ -354,8 +407,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void getTerrenoTamanoYUbicacion()
-    {
+    public void getTerrenoTamanoYUbicacion() throws NoTerrenoException {
         int[] elementosADevolver = {0,1,0};
         Object[] o = aplicacion.getTerreno(elementosADevolver,1);
         assertEquals(144, o[0]);
@@ -364,8 +416,7 @@ public class AplicacionTest {
     }
 
         @Test
-    public void getTerrenoLimites()
-    {
+    public void getTerrenoLimites() throws NoTerrenoException {
         int[] elementosADevolver = {1,0,1};
         Object[] o = aplicacion.getTerreno(elementosADevolver,1);
         assertNull(o[0]);
@@ -375,8 +426,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void getParcelasTodosDatos()
-    {
+    public void getParcelasTodosDatos() throws NoParcelaException {
         int[] elementosADevolver = {0,0};
         Object[] o = aplicacion.getParcela(elementosADevolver,1);
         assertArrayEquals(new Ubicacion[]{new Ubicacion(12,12), new Ubicacion(12,14),
@@ -385,8 +435,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void getParcelasLimites()
-    {
+    public void getParcelasLimites() throws NoParcelaException {
         int[] elementosADevolver = {0,1};
         Object[] o = aplicacion.getParcela(elementosADevolver,1);
         assertArrayEquals(new Ubicacion[]{new Ubicacion(12,12), new Ubicacion(12,14),
@@ -395,15 +444,28 @@ public class AplicacionTest {
     }
 
     @Test
-    public void getParcelasUbicacion()
-    {
+    public void getParcelasUbicacion() throws NoParcelaException {
         int[] elementosADevolver = {1,0};
         Object[] o = aplicacion.getParcela(elementosADevolver,1);
         assertNull(o[0]);
         assertEquals(new Ubicacion(13, 13), o[1]);
     }
 
-    //TODO:Comprobar que saltan las nuevas excepciones
+    @Test
+    public void getTerrenoNoExistente()
+    {
+        assertThrows(NoTerrenoException.class, () -> {
+            aplicacion.getTerreno(new int[]{1,1,1}, 9);
+        });
+    }
+
+    @Test
+    public void getParcelaNoExistente()
+    {
+        assertThrows(NoParcelaException.class, () -> {
+            aplicacion.getParcela(new int[]{1,1}, 9);
+        });
+    }
 
 
 }

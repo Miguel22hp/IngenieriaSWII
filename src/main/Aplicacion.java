@@ -27,14 +27,15 @@ public class Aplicacion {
         this.idParcela = 1;
     }
 
-    public void addTerreno(int tamano, Ubicacion[] limites, Ubicacion ubi)
+    public int addTerreno(int tamano, Ubicacion[] limites, Ubicacion ubi)
     {
         Terreno terreno = new Terreno(idTerrenos,tamano,limites,ubi);
         listaTerrenos.put(idTerrenos,terreno);
         idTerrenos++;
+        return  idTerrenos-1;
     }
 
-    public void addParcela(int idTerreno, Ubicacion[] limites, Ubicacion ubi) throws NoTerrenoException {
+    public int addParcela(int idTerreno, Ubicacion[] limites, Ubicacion ubi) throws NoTerrenoException {
         Parcelas parcelas = new Parcelas(idParcela, idTerreno, limites, ubi);
         Terreno terreno = listaTerrenos.get(idTerreno);
         if(terreno == null) //Cuando el terreno que se quiere añadir no existe
@@ -46,7 +47,9 @@ public class Aplicacion {
             terreno.addParcela(parcelas);
             listaParcelas.put(idParcela,parcelas);
             idParcela++;
+            return idParcela-1;
         }
+
     }
 
     public int removeTerreno(int idTerreno)
@@ -108,14 +111,15 @@ public class Aplicacion {
      * @param limites an array of Ubicacion or null  if you want to modyfy or not
      * @param ubi an Ubication or null  if you want to modyfy or not
      * @param idParcela the id of the Parcela you want to modify
+     * @throws NoParcelaException if there is not a Parcela with that id
      */
     public void modParcela(int[] elementosMod, Ubicacion[] limites,
-                           Ubicacion ubi, int idParcela)
-    {
+                           Ubicacion ubi, int idParcela) throws NoParcelaException {
         Parcelas parcelas = listaParcelas.get(idParcela);
         if(parcelas == null)
         {
             //TODO:NoParcelaException
+            throw new NoParcelaException("No existe esta parcela");
         }
 
          if(elementosMod[0] == 0) //Want to modify limites
@@ -128,13 +132,12 @@ public class Aplicacion {
         ter.addParcela(parcelas); // Al hacer un put sobre un elemento ya existente lo sobreescribe
     }
 
-    public Object[] getTerreno(int[] elementosMod, int idTerreno)
-    {
+    public Object[] getTerreno(int[] elementosMod, int idTerreno) throws NoTerrenoException {
         Object[] e = new Object[3];
         Terreno terreno = listaTerrenos.get(idTerreno);
         if(terreno == null) //Cuando el terreno que se quiere añadir no existe
         {
-            //throw new NoTerrenoException("");
+            throw new NoTerrenoException("No existe terreno con ese id");
         }
         if(elementosMod[0] == 0) //Want to get tamaño
             e[0] = terreno.getTamano();
@@ -154,12 +157,11 @@ public class Aplicacion {
         return e;
     }
 
-    public Object[] getParcela(int[] elementosMod, int idParcela)
-    {
+    public Object[] getParcela(int[] elementosMod, int idParcela) throws NoParcelaException {
         Parcelas parcelas = listaParcelas.get(idParcela);
         if(parcelas == null)
         {
-            //TODO:NoParcelaException
+            throw new NoParcelaException("");
         }
         Object[] e = new Object[3];
          if(elementosMod[0] == 0) //Want to get limites
