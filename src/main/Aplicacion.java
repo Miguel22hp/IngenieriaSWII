@@ -10,14 +10,25 @@ public class Aplicacion {
     private int idTerrenos;
     private int idParcela;
 
+    /**
+     * Devuelve lista de todos los terrenos
+     * @return lista de los terrenos
+     */
     public HashMap<Integer, Terreno> getListaTerrenos() {
         return listaTerrenos;
     }
 
+    /**
+     * Devuelve lista de todqs las parcelas
+     * @return lista de las parcelas
+     */
     public HashMap<Integer, Parcelas> getListaParcelas() {
         return listaParcelas;
     }
 
+    /**
+     * Creas la aplicación inicializando los ILF propuestos para el ciclo
+     */
     public Aplicacion()
     {
         this.listaTerrenos = new HashMap<>();
@@ -27,6 +38,13 @@ public class Aplicacion {
         this.idParcela = 1;
     }
 
+    /**
+     * Creas un terreno, añadiendole los siguintes parámetros, y aumentas en 1 el oidentificador de terrenos
+     * @param tamano se corresponde al tamaño del terreno
+     * @param limites array con los limites del terreno. Pueden ser tantos como quieras
+     * @param ubi Una ubicación que es el punto de referencia del terreno
+     * @return el identificador de este terreno
+     */
     public int addTerreno(int tamano, Ubicacion[] limites, Ubicacion ubi)
     {
         Terreno terreno = new Terreno(idTerrenos,tamano,limites,ubi);
@@ -35,6 +53,14 @@ public class Aplicacion {
         return  idTerrenos-1;
     }
 
+    /**
+     * Crea una parcela asociada al terreno del que se pasa el identificador
+     * @param idTerreno Identificador del terreno al que va a pertencer esa parcela
+     * @param limites array con los limites del terreno. Pueden ser tantos como quieras
+     * @param ubi Una ubicación que es el punto de referencia de la parcela
+     * @return el identificador de esta parcela
+     * @throws NoTerrenoException si no existe el terreno del que forma parte la parcela
+     */
     public int addParcela(int idTerreno, Ubicacion[] limites, Ubicacion ubi) throws NoTerrenoException {
         Parcelas parcelas = new Parcelas(idParcela, idTerreno, limites, ubi);
         Terreno terreno = listaTerrenos.get(idTerreno);
@@ -52,6 +78,11 @@ public class Aplicacion {
 
     }
 
+    /**
+     * Borra el terreno indicado
+     * @param idTerreno indica el terreno a borrar
+     * @return 0 si la ha borrado, -1 si no existe
+     */
     public int removeTerreno(int idTerreno)
     {
         Terreno borrado = listaTerrenos.remove(idTerreno);
@@ -61,6 +92,11 @@ public class Aplicacion {
             return 0;
     }
 
+    /**
+     * Borra la parcela indicado
+     * @param idParcela indica la parcela a borrar
+     * @return 0 si la ha borrado, -1 si no existe
+     */
     public int removeParcela(int idParcela)
     {
 
@@ -76,15 +112,15 @@ public class Aplicacion {
 
 
     /**
-     * This method allows us to modify a param of a Terreno
-     * @param elementosMod is an array of integers that has 3 positions,
-     *                     and has a 0 on the param he wants to modify and a 1
-     *                     in the elements he doesn't want to modify
-     * @param tamano an int with a number or -1 if you want to modyfy or not
-     * @param limites an array of Ubicacion or null  if you want to modyfy or not
-     * @param ubi an Ubication or null  if you want to modyfy or not
-     * @param idTerreno the id of the Terreno you want to modify
-     * @throws NoTerrenoException if there is not a Terreno with that id
+     * Este método nos permite modificar un parámetro de un Terreno.
+     * @param elementosMod es un array de enteros que tiene 3 posiciones,
+     *                     y tiene un 0 en el parámetro que se desea modificar y un 1
+     *                     en los elementos que no se desean modificar.
+     * @param tamano un entero con un número o -1 si se desea modificar o no
+     * @param limites un array de Ubicacion o null si se desea modificar o no
+     * @param ubi una Ubicacion o null si se desea modificar o no
+     * @param idTerreno el ID del Terreno que se desea modificar
+     * @throws NoTerrenoException si no hay un Terreno con ese ID
      */
     public  void modTerreno(int[] elementosMod, int tamano,
                             Ubicacion[] limites, Ubicacion ubi, int idTerreno) throws NoTerrenoException {
@@ -104,21 +140,21 @@ public class Aplicacion {
     }
 
     /**
-     * This method allows us to modify a param of a Terreno
-     * @param elementosMod is an array of integers that has 2 positions,
-     *                     and has a 0 on the param he wants to modify and a 1
-     *                     in the elements he doesn't want to modify
-     * @param limites an array of Ubicacion or null  if you want to modyfy or not
-     * @param ubi an Ubication or null  if you want to modyfy or not
-     * @param idParcela the id of the Parcela you want to modify
-     * @throws NoParcelaException if there is not a Parcela with that id
+     * Este método nos permite modificar un parámetro de una Parcela.
+     * @param elementosMod es un array de enteros que tiene 2 posiciones,
+     *                     y tiene un 0 en el parámetro que se desea modificar y un 1
+     *                     en los elementos que no se desean modificar.
+     * @param limites un array de Ubicacion o null si se desea modificar o no
+     * @param ubi una Ubicacion o null si se desea modificar o no
+     * @param idParcela el ID de la Parcela que se desea modificar
+     * @throws NoParcelaException si no hay una Parcela con ese ID
      */
+
     public void modParcela(int[] elementosMod, Ubicacion[] limites,
                            Ubicacion ubi, int idParcela) throws NoParcelaException {
         Parcelas parcelas = listaParcelas.get(idParcela);
         if(parcelas == null)
         {
-            //TODO:NoParcelaException
             throw new NoParcelaException("No existe esta parcela");
         }
 
@@ -132,6 +168,14 @@ public class Aplicacion {
         ter.addParcela(parcelas); // Al hacer un put sobre un elemento ya existente lo sobreescribe
     }
 
+    /**
+     * Este método te da los datos que le pides acerca del terreno que le indicas
+     * @param elementosMod un array de enteros de 3 elementos, en los cuales se indica con 0 el elemento que quieres
+     *                     que te devuelva, y con un 1 los que no.
+     * @param idTerreno el identificador del terreno del que obtener los datos.
+     * @return un array con los objetos que has pedido.
+     * @throws NoTerrenoException si el @param idTerreno que le pasas no se corresponde a ningún terreno en el sistema
+     */
     public Object[] getTerreno(int[] elementosMod, int idTerreno) throws NoTerrenoException {
         Object[] e = new Object[3];
         Terreno terreno = listaTerrenos.get(idTerreno);
@@ -157,6 +201,14 @@ public class Aplicacion {
         return e;
     }
 
+    /**
+     * Este método te da los datos que le pides acerca de la parcela que le indicas
+     * @param elementosMod un array de enteros de 2 elementos, en los cuales se indica con 0 el elemento que quieres
+     *                     que te devuelva, y con un 1 los que no.
+     * @param idParcela el identificador de la parcela del que obtener los datos.
+     * @return un array con los objetos que has pedido.
+     * @throws NoParcelaException si el @param idParcela que le pasas no se corresponde a ningún terreno en el sistema
+     */
     public Object[] getParcela(int[] elementosMod, int idParcela) throws NoParcelaException {
         Parcelas parcelas = listaParcelas.get(idParcela);
         if(parcelas == null)
