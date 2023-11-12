@@ -82,6 +82,11 @@ public class Main {
         
     }
 
+    /**
+     * Borra la parcela asociada al id que entra por entrada estandar, si
+     * existe una parcela con ese identificador
+     * @param aplicacion
+     */
     private static void borrarParcela(Aplicacion aplicacion) {
         System.out.println("Seleccionar el identificador de la parcela que quieres borrar");
         System.out.print("\tId de la parcela:");
@@ -93,6 +98,11 @@ public class Main {
             System.out.println("Parcela borrado");
     }
 
+    /**
+     * Borra el terreno asociado al id que entra por entrada estandar, si
+     * existe un terreno con ese identificador
+     * @param aplicacion
+     */
     private static void borrarTerreno(Aplicacion aplicacion) {
         System.out.println("Seleccionar el identificador del terreno que quieres borrar");
         System.out.print("\tId del terreno:");
@@ -104,6 +114,11 @@ public class Main {
             System.out.println("Terreno borrado");
     }
 
+    /**
+     * Añade una parcela con la ubicación y los límites
+     * que va recibiendo por entrada estandar.
+     * @param aplicacion
+     */
     private static void anadirParcela(Aplicacion aplicacion) {
          System.out.print("Id del terreno al que pertenece la parcela:");
         int idTerreno = in.nextInt();
@@ -144,6 +159,13 @@ public class Main {
         }
     }
 
+    /**
+     * Modifica la parcela asociada al identificador que recibe por la pantalla,
+     * si existe. En función de los datos que el usuario quiere modificar, le
+     * permite que escriba los datos de aquellos que quiera modificar entre
+     * ubicación y límites
+     * @param aplicacion
+     */
     private static void modificarParcelas(Aplicacion aplicacion) {
 
         System.out.print("\tId de la parcela:");
@@ -202,6 +224,11 @@ public class Main {
 
     }
 
+    /**
+     * Muestra los parametros que te interese ver de la parcela que le solicites
+     * indicando su identificador, o de todas en caso de que escribas 0
+     * @param aplicacion
+     */
     private static void verParcelas(Aplicacion aplicacion) {
         System.out.println("Seleccionar el identificador de la parcela. Si se escribe 0 se muestra el " +
                 "de todas las parcelas en el sistema. Sino seleccionar el identificador de la parcela que buscas");
@@ -262,6 +289,11 @@ public class Main {
         }
     }
 
+    /**
+     * Muestra los parametros que te interese ver del terreno que le solicites
+     * indicando su identificador, o de todos en caso de que escribas 0
+     * @param aplicacion
+     */
     private static void verTerrenos(Aplicacion aplicacion) throws NoTerrenoException {
         System.out.println("Seleccionar el identificador del terreno. Si se escribe 0 se muestra el " +
                 "de todos los terrenos en el sistema. Sino seleccionar el identificador del terreno que buscas");
@@ -325,6 +357,11 @@ public class Main {
 
     }
 
+    /**
+     * Añade un terreno con el tamaño, la ubicación y los límites
+     * que va recibiendo por entrada estandar.
+     * @param aplicacion
+     */
     private static void anadirTerreno(Aplicacion aplicacion) {
         System.out.print("Valor del tamaño:");
         int tamano = in.nextInt();
@@ -359,6 +396,13 @@ public class Main {
         System.out.println("El identificador del terreno creado es "+ idTerreno);
     }
 
+    /**
+     * Modifica el terreno asociado al identificador que recibe por la pantalla,
+     * si existe. En función de los datos que el usuario quiere modificar, le
+     * permite que escriba los datos de aquellos que quiera modificar entre tamaño,
+     * ubicación y límites
+     * @param aplicacion
+     */
     private static void modificarTerrenos(Aplicacion aplicacion) {
 
         System.out.print("\tId del terreno:");
