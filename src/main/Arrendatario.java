@@ -1,26 +1,58 @@
 package main;
-public class Arrendatario 
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Arrendatario
 {
-	int id;
-	String nombre;
-	
-    public Arrendatario(int id, String nombre) 
+
+	String dni;
+    int edad;
+    char sexo;
+    String aval;
+    List<Integer> alquileres;
+    public Arrendatario(String dni, int edad, char sexo, String aval)
 	{
-        this.id = id;
-        this.nombre = nombre;
+        this.dni = dni;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.aval = aval;
+        alquileres = new ArrayList<>();
     }
-	
-    public int getId() {
-        return id;
+
+    public String getDni() {
+        return dni;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public int getEdad() {
+        return edad;
     }
-    public String getNombre() {
-        return nombre;
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+    public char getSexo() {
+        return sexo;
     }
-	
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getAval() {
+        return aval;
+    }
+
+    public void setAval(String aval) {
+        this.aval = aval;
+    }
+
+    public List<Integer> getAlquileres() {
+        return alquileres;
+    }
+
+    public void setAlquileres(List<Integer> alquileres) {
+        this.alquileres = alquileres;
+    }
 }

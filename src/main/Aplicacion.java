@@ -1,14 +1,16 @@
 package main;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Aplicacion {
 
     protected HashMap<Integer,Terreno> listaTerrenos;
     protected HashMap<Integer,Parcelas> listaParcelas;
-    protected HashMap<Integer, Arrendatario> listaArrendatarios;
+    protected HashMap<String, Arrendatario> listaArrendatarios;
     private int idTerrenos;
     private int idParcela;
+
 
     /**
      * Devuelve lista de todos los terrenos
@@ -228,5 +230,28 @@ public class Aplicacion {
 
         return e;
     }
+
+    /**
+     * Este metodo crea un arrendatario con identificador dni si no existe
+     * con ese dni, y lo añade al sistema
+     * @param dni identificador del arrendatario
+     * @param edad edad del arrendatario
+     * @param sexo sexo del arrendatario. Puede ser H o M
+     * @param aval el aval que tra ese nuevo arrendatario
+     * @return dni del arrendatario creado o null si ya existia
+     */
+    public String addArrendatario(String dni, int edad, char sexo, String aval)
+    {
+        Arrendatario arr = listaArrendatarios.get(dni);
+        if (arr == null)
+        {
+            arr = new Arrendatario(dni,edad,sexo,aval);
+            listaArrendatarios.put(dni,arr);
+            return dni;
+        }
+        else
+            return null;
+    }
+
 
 }

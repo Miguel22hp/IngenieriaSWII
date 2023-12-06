@@ -21,6 +21,7 @@ public class Main {
             System.out.println("Obtener Datos Parcela: 6");
             System.out.println("Borrar un Terreno: 7");
             System.out.println("Borrar una Parcela: 8");
+            System.out.println("Añadir un arrendatario: 9");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
             int operacionSeleccionada = in.nextInt();
@@ -69,6 +70,10 @@ public class Main {
                     System.out.println("Borrar una Parcela: 8");
                     borrarParcela(aplicacion);
                     break;
+                case 9:
+                    System.out.println("Añadir un arrendatario: 9");
+                    anadirArrendatario(aplicacion);
+                    break;
 
                 default:
                     System.out.println("No hay operación asociadan");
@@ -80,6 +85,27 @@ public class Main {
         }
 
         
+    }
+
+    private static void anadirArrendatario(Aplicacion aplicacion) {
+        System.out.println("Introduce el dni del arrendatario: ");
+        String dni = in.next();
+
+        System.out.print("Edad del arrendatario: ");
+        int edad = in.nextInt();
+
+        System.out.print("Introduce el sexo del arrendatario, con una H para hombre y una M para mujer: ");
+        char sexo = in.next().charAt(0);
+
+        System.out.println("Introduce el aval del arrendatario: ");
+        String aval = in.next();
+
+        String arrendatarioCreado = aplicacion.addArrendatario(dni,edad,sexo,aval);
+        if(arrendatarioCreado == null)
+            System.out.println("Ya existe un arrendatario con ese dni");
+        else
+            System.out.println("Arrendatario creado con dni " + arrendatarioCreado);
+
     }
 
     /**
@@ -143,8 +169,8 @@ public class Main {
             System.out.print(" ");
             System.out.print("\tCoordenada Y:");
             coordY = in.nextInt();
-            ubicacion = new Ubicacion(coordX,coordY);
-            limites[i] = ubicacion;
+            Ubicacion ubicacion2 = new Ubicacion(coordX,coordY);
+            limites[i] = ubicacion2;
         }
 
         try {
@@ -386,8 +412,8 @@ public class Main {
             System.out.print(" ");
             System.out.print("\tCoordenada Y:");
             coordY = in.nextInt();
-            ubicacion = new Ubicacion(coordX,coordY);
-            limites[i] = ubicacion;
+            Ubicacion ubicacion2 = new Ubicacion(coordX,coordY);
+            limites[i] = ubicacion2;
         }
 
         int idTerreno = aplicacion.addTerreno(tamano,limites,ubicacion); //Cambiar el método para que devuelva el identificador.
