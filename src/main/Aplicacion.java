@@ -253,5 +253,21 @@ public class Aplicacion {
             return null;
     }
 
+    /**
+     * Este metodo borra el arrendatario asociado a ese dni y
+     * devuelve el dni de ese arrendatario o null si no
+     * existia en el sistema arrendatario con ese dni
+     * @param dni
+     * @return
+     */
+    public String removeArrendatario(String dni)
+    {
+        Arrendatario arr = listaArrendatarios.remove(dni);
+        if(arr != null)
+            return  arr.getDni();
+        else
+            return null;
+    }
+
 
 }
