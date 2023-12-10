@@ -1,7 +1,9 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class Aplicacion {
 
@@ -289,20 +291,6 @@ public class Aplicacion {
             System.out.println("Arrendatario actualizado = " + arr);
 
         }
-        /*
-        if(parcelas == null)
-        {
-            throw new NoParcelaException("No existe esta parcela");
-        }
-
-         if(elementosMod[0] == 0) //Want to modify limites
-             parcelas.setLimites(limites);
-
-        if(elementosMod[1] == 0) //Want to modify ubication
-            parcelas.setUbicacion(ubi);
-
-        Terreno ter = listaTerrenos.get(parcelas.getIdTerreno());
-        ter.addParcela(parcelas); // Al hacer un put sobre un elemento ya existente lo sobreescribe
-         */
     }
+
 }
