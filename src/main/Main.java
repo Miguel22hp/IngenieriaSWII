@@ -22,6 +22,7 @@ public class Main {
             System.out.println("Borrar un Terreno: 7");
             System.out.println("Borrar una Parcela: 8");
             System.out.println("Añadir un arrendatario: 9");
+            System.out.println("Borrar un arrendatario: 10");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
             int operacionSeleccionada = in.nextInt();
@@ -74,7 +75,10 @@ public class Main {
                     System.out.println("Añadir un arrendatario: 9");
                     anadirArrendatario(aplicacion);
                     break;
-
+                case 10:
+                    System.out.println("Borrar un arrendatario: 10");
+                    borrarArrendatario(aplicacion);
+                    break;
                 default:
                     System.out.println("No hay operación asociadan");
             }
@@ -85,6 +89,18 @@ public class Main {
         }
 
         
+    }
+
+    private static void borrarArrendatario(Aplicacion aplicacion) {
+        System.out.println("Introduce el dni del arrendatario: ");
+        String dni = in.next();
+
+        String dniBorrado = aplicacion.removeArrendatario(dni);
+        if(dniBorrado != null)
+            System.out.println("Arrendatario con dni " + dniBorrado + " borrado del sistema");
+        else
+            System.out.println("No existía arrendatario con ese dni");
+
     }
 
     private static void anadirArrendatario(Aplicacion aplicacion) {
