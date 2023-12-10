@@ -269,5 +269,40 @@ public class Aplicacion {
             return null;
     }
 
+    public void modArrendatario(int[] elementosMod, String dni, int edad,
+                                char sexo, String aval)
+    {
+        Arrendatario arr = listaArrendatarios.get(dni);
+        if(arr == null)
+            System.out.println("No existe ese arrendatario");
+        else
+        {
+            System.out.println("Arrendatario ha actualizar = " + arr);
+            if (elementosMod[0] == 0) //Want to modify edad
+                arr.setEdad(edad);
 
+            if (elementosMod[1] == 0) //Want to modify sexo
+                arr.setSexo(sexo);
+            if(elementosMod[2] == 0) //Wants to modify aval
+                arr.setAval(aval);
+
+            System.out.println("Arrendatario actualizado = " + arr);
+
+        }
+        /*
+        if(parcelas == null)
+        {
+            throw new NoParcelaException("No existe esta parcela");
+        }
+
+         if(elementosMod[0] == 0) //Want to modify limites
+             parcelas.setLimites(limites);
+
+        if(elementosMod[1] == 0) //Want to modify ubication
+            parcelas.setUbicacion(ubi);
+
+        Terreno ter = listaTerrenos.get(parcelas.getIdTerreno());
+        ter.addParcela(parcelas); // Al hacer un put sobre un elemento ya existente lo sobreescribe
+         */
+    }
 }

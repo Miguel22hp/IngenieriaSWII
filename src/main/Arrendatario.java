@@ -5,8 +5,18 @@ import java.util.List;
 
 public class Arrendatario
 {
+    @Override
+    public String toString() {
+        return "Arrendatario{" +
+                "dni='" + dni + '\'' +
+                ", edad=" + edad +
+                ", sexo=" + sexo +
+                ", aval='" + aval + '\'' +
+                ", alquileres=" + alquileres +
+                '}';
+    }
 
-	String dni;
+    String dni;
     int edad;
     char sexo;
     String aval;

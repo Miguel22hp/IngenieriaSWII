@@ -23,6 +23,7 @@ public class Main {
             System.out.println("Borrar una Parcela: 8");
             System.out.println("Añadir un arrendatario: 9");
             System.out.println("Borrar un arrendatario: 10");
+            System.out.println("Modificar un arrendatario: 11");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
             int operacionSeleccionada = in.nextInt();
@@ -79,8 +80,13 @@ public class Main {
                     System.out.println("Borrar un arrendatario: 10");
                     borrarArrendatario(aplicacion);
                     break;
+                case 11:
+                    System.out.println("Modificar un arrendatario: 11");
+                    modificarArrendatario(aplicacion);
+                    break;
+
                 default:
-                    System.out.println("No hay operación asociadan");
+                    System.out.println("No hay operación asociada");
             }
 
             System.out.println("");
@@ -89,6 +95,45 @@ public class Main {
         }
 
         
+    }
+
+    private static void modificarArrendatario(Aplicacion aplicacion) {
+        System.out.println("Introduce el dni del arrendatario: ");
+        String dni = in.next();
+
+        System.out.println("Selecciona los datos que quieras modificar, poniendo un 0 si quieres ver ese dato, o " +
+                "un 1 si no te interesa ver ese dato:");
+        System.out.println("Edad del arrendatario:");
+        int edadM = in.nextInt();
+        int edad = -1;
+        if(edadM == 0)
+        {
+            System.out.println("Introduce la nueva edad del arrendatario");
+            edad = in.nextInt();
+        }
+        System.out.println("Sexo del arrendatario:");
+        int sexoM = in.nextInt();
+        char sexo = ' '; //TODO: ERROR AL INICIALIZAR CHAR CORREGIDO EN PRUEBAS
+        if(sexoM == 0)
+        {
+            System.out.println("Introduce el nuevo sexo del arrendatario:");
+            sexo = in.next().charAt(0);
+        }
+        System.out.println("Aval del arrendatario:");
+        int avalM = in.nextInt();
+        String aval = "";
+        if(avalM == 0)
+        {
+            System.out.println("Introduce el nuevo aval del arrendatario:");
+            aval = in.next();
+        }
+
+        int[] array = {edadM,sexoM,avalM};
+
+
+        aplicacion.modArrendatario(array,dni,edad,sexo,aval);
+
+
     }
 
     private static void borrarArrendatario(Aplicacion aplicacion) {
