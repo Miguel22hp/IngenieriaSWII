@@ -24,6 +24,7 @@ public class Main {
             System.out.println("Añadir un arrendatario: 9");
             System.out.println("Borrar un arrendatario: 10");
             System.out.println("Modificar un arrendatario: 11");
+            System.out.println("Generar recibos: 14");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
             int operacionSeleccionada = in.nextInt();
@@ -84,6 +85,11 @@ public class Main {
                     System.out.println("Modificar un arrendatario: 11");
                     modificarArrendatario(aplicacion);
                     break;
+                case 14:
+                    System.out.println("Generar recibos: 14");
+                    generarRecibo(aplicacion);
+                    break;
+
 
                 default:
                     System.out.println("No hay operación asociada");
@@ -95,6 +101,27 @@ public class Main {
         }
 
         
+    }
+
+    private static void generarRecibo(Aplicacion aplicacion) {
+        System.out.println("Introduce un 0 si el recibo tiene un impuesto IVA o 1 si es IRPF: ");
+        int val = in.nextInt();
+        String tipoImpuesto = "";
+
+        if(val == 0)
+            tipoImpuesto = "IVA";
+        else if (val == 1)
+            tipoImpuesto = "IRPF";
+        else {
+            System.out.println("Tipo de impuesto no existente");
+            return;
+        }
+
+        System.out.println("Introduce lo que se debe pagar en impuestos: ");
+        float impuesto = in.nextFloat();
+
+        System.out.println("Numero de recibos generados " + aplicacion.generarRecibos(tipoImpuesto,impuesto));
+
     }
 
     private static void modificarArrendatario(Aplicacion aplicacion) {
