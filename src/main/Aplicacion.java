@@ -1,9 +1,9 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Aplicacion {
 
@@ -12,6 +12,11 @@ public class Aplicacion {
     protected HashMap<String, Arrendatario> listaArrendatarios;
     private int idTerrenos;
     private int idParcela;
+    private int idAlquiler;
+    private int idRecibo;
+
+    private HashMap<Integer,Recibo> listaRecibos;
+    private HashMap<Integer,Alquiler> listaAlquileres;
 
 
     /**
@@ -40,6 +45,10 @@ public class Aplicacion {
         this.listaArrendatarios = new HashMap<>();
         this.idTerrenos = 1;
         this.idParcela = 1;
+        this.idAlquiler = 1;
+        this.idRecibo = 1;
+        this.listaRecibos = new HashMap<>();
+        this.listaAlquileres = new HashMap<>();
     }
 
     /**
@@ -293,4 +302,24 @@ public class Aplicacion {
         }
     }
 
+    public int generarRecibos(String tipoImpuesto, float impuesto) //TODO: Error dbn encontrado código
+    {
+        Set<Integer> alquileres = listaAlquileres.keySet();
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+        // Formatear la fecha y hora según tus preferencias
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaFormateada = fechaHoraActual.format(formato);
+        int j = 0;
+
+        for(Integer i: alquileres)
+        {
+            Alquiler a = listaAlquileres.get(i);
+            Recibo r = new Recibo(idRecibo, fechaFormateada, a.importe, tipoImpuesto, impuesto, false, a.idAlquiler);
+            listaRecibos.put(idRecibo,r);
+            idRecibo++;
+            j++;
+        }
+        return  j;
+    }
 }
