@@ -25,6 +25,7 @@ public class AplicacionTest {
                 ,new Ubicacion(5,5));
         aplicacion.addParcela(1, new Ubicacion[]{new Ubicacion(12,12), new Ubicacion(12,14),
                 new Ubicacion(14,12), new Ubicacion(14,14)}, new Ubicacion(13,13));
+        aplicacion.addArrendatario("1234P", 33, 'H',"Avalado por Banco");
     }
 
     @Test
@@ -466,6 +467,42 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
             aplicacion.getParcela(new int[]{1,1}, 9);
         });
     }
+
+    @Test
+    public void anadirArrendatarioYaEnElSistema()
+    {
+        assertEquals(aplicacion.addArrendatario("1234P", 33, 'H',"Avalado por Banco"), null);
+    }
+
+    @Test
+    public void anadirArrendatario()
+    {
+        assertEquals(aplicacion.addArrendatario("1235P", 33, 'H',"Avalado por Banco"), "1235P");
+    }
+
+    @Test
+    public void borrarArrendatarioYaEnElSistema()
+    {
+        assertEquals(aplicacion.removeArrendatario("1234P"),"1234P");
+    }
+
+    @Test
+    public void borrarArrendatarioNoEnElSistema()
+    {
+        assertEquals(aplicacion.removeArrendatario("1235P"),null);
+    }
+
+
+    @Test
+    public void modificarArrendatario()
+    {
+
+        aplicacion.modArrendatario(new int[]{0,0,0},"1234P",21,'H',);
+        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),21);
+        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'H');
+        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Aval");
+    }
+
 
 
 }
