@@ -10,6 +10,7 @@ public class Aplicacion {
     protected HashMap<Integer, Terreno> listaTerrenos;
     protected HashMap<Integer, Parcelas> listaParcelas;
     protected HashMap<String, Arrendatario> listaArrendatarios;
+
     private int idTerrenos;
     private int idParcela;
     private int idAlquiler;
