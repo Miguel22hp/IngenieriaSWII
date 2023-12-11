@@ -65,4 +65,7 @@ public class Arrendatario
     public void setAlquileres(List<Integer> alquileres) {
         this.alquileres = alquileres;
     }
+
+    public void addAlquiler(Alquiler alquiler){alquileres.add(alquiler.idAlquiler);}//TODO: Error DBN encontrado en código/pruebas
+    //TODO: Error código encontrado en pruebas porque el metodo esta mal
 }
