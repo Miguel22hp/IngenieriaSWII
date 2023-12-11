@@ -319,6 +319,7 @@ public class Aplicacion {
             listaRecibos.put(idRecibo,r);
             idRecibo++;
             j++;
+            System.out.println("Recibo creado: " + r);
         }
         return  j;
     }

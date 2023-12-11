@@ -19,6 +19,19 @@ public class Recibo {
         this.idAlquiler = idAlquiler;
     }
 
+    @Override
+    public String toString() {
+        return "Recibo{" +
+                "numRecibo=" + numRecibo +
+                ", fechaEmision='" + fechaEmision + '\'' +
+                ", importeAlquiler=" + importeAlquiler +
+                ", tipoImpuesto='" + tipoImpuesto + '\'' +
+                ", impuesto=" + impuesto +
+                ", pagado=" + pagado +
+                ", idAlquiler=" + idAlquiler +
+                '}';
+    }
+
     public void pagado() {
         this.pagado = true;
     }

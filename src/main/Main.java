@@ -382,8 +382,6 @@ public class Main {
         }
         else
         {
-            //TODO:
-            //Meterlo en un try and catch y lanzar una excepción en caso de que se meta un id que no exista terreno
             try {
                 Object[] datosParcela = aplicacion.getParcela(array, idParcela); //Obtienes los datos. Debería de cazarse una excepción
                 System.out.println("---------------Datos de terreno con id = " + idParcela + " ------------------");
