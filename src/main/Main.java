@@ -27,6 +27,7 @@ public class Main {
             System.out.println("Añadir un alquiler: 12");
             System.out.println("Eliminar un alquiler: 13");
             System.out.println("Generar recibos: 14");
+            System.out.println("Pagar recibos: 15");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
             int operacionSeleccionada = in.nextInt();
@@ -99,7 +100,9 @@ public class Main {
                     System.out.println("Generar recibos: 14");
                     generarRecibo(aplicacion);
                     break;
-
+                case 15:
+                    System.out.println("Pagar recibos: 15");
+                    pagarRecibo(aplicacion);
 
                 default:
                     System.out.println("No hay operación asociada");
@@ -624,6 +627,17 @@ public class Main {
             System.out.println("No existe parcela con ese id");
         else
             System.out.println("Parcela borrado");
+    }
+
+    private static void pagarRecibo(Aplicacion aplicacion)
+    {
+        System.out.println("Seleccionar el identificador del recibo a pagar");
+        System.out.print("\tId del recibo:");
+        int idRecibo = in.nextInt();
+        if(!aplicacion.pagarRecibo(idRecibo))
+            System.out.println("No existe recibo con ese id");
+        else
+            System.out.println("Recibo pagado");
     }
 
 }

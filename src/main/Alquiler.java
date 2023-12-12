@@ -49,4 +49,9 @@ public class Alquiler {
     {
         return dniArrendatario;
     }
+
+    public int getId()
+    {
+        return idAlquiler;
+    }
 }

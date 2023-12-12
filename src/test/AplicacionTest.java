@@ -581,5 +581,23 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
 
     //TODO:crear recibo tests y alquiler
 
+    @Test
+    public void testAlquilerDeArrendatario()
+    {
+        int id = aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
+        assertEquals(aplicacion.getListaAlquileres().get(id), aplicacion.getListaArrendatarios().get("1235P").getAlquileres().get(0));
+    }
+
+    @Test
+    public void testPagarRecibo()
+    {
+        aplicacion.addParcela(1, new Ubicacion[]{new Ubicacion(16,16), new Ubicacion(12,14),
+                new Ubicacion(14,12), new Ubicacion(14,14)}, new Ubicacion(50,50));
+        aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
+
+        aplicacion.generarRecibos("IVA", 5f);
+        aplicacion.pagarRecibo(aplicacion.getListaRecibos().get(0).getNumRecibo());
+        assertTrue(aplicacion.getListaRecibos().get(0).isPagado());
+    }
 
 }
