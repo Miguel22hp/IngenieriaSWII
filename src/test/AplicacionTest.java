@@ -4,7 +4,10 @@ import main.*;
 import org.junit.*;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -537,6 +540,43 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval3");
 
+    }
+
+    @Test
+    public void testGenerarRecibos() throws NoParcelaException, NoArrendatarioException, NoTerrenoException {
+        aplicacion.addParcela(1, new Ubicacion[]{new Ubicacion(16,16), new Ubicacion(12,14),
+                new Ubicacion(14,12), new Ubicacion(14,14)}, new Ubicacion(50,50));
+        aplicacion.addParcela(1, new Ubicacion[]{new Ubicacion(12,12), new Ubicacion(12,14),
+                new Ubicacion(14,12), new Ubicacion(14,14)}, new Ubicacion(99,99));
+        assertEquals(aplicacion.addArrendatario("1235P", 33, 'H',"Avalado por Banco"), "1235P");
+        aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
+        aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 2, "1235P");
+
+        // Llamar al método generarRecibos con valores de prueba
+        int recibosGenerados = aplicacion.generarRecibos("IVA", 5f);
+
+        // Verificar que el método devuelve el resultado esperado
+        assertEquals(2, recibosGenerados);
+        // Verificar que los recibos se hayan generado y almacenado correctamente
+        assertNotNull(aplicacion.getListaRecibos().get(1));
+        assertNotNull(aplicacion.getListaRecibos().get(2));
+
+        Set<Integer> alquileres = aplicacion.getListaAlquileres().keySet();
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+        // Formatear la fecha y hora según tus preferencias
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaFormateada = fechaHoraActual.format(formato);
+
+        String resultadoEsperado = "Recibo{numRecibo=1, fechaEmision='" + fechaFormateada + "', importeAlquiler=1.0, tipoImpuesto='IVA', impuesto=5.0, pagado=false, idAlquiler=1}";
+        assertEquals(aplicacion.getListaRecibos().get(1).toString(),resultadoEsperado);
+        String resultadoEsperado2 = "Recibo{numRecibo=2, fechaEmision='" + fechaFormateada + "', importeAlquiler=1.0, tipoImpuesto='IVA', impuesto=5.0, pagado=false, idAlquiler=2}";
+        assertEquals(aplicacion.getListaRecibos().get(2).toString(),resultadoEsperado2);
+    }
+
+    @Test
+    public void testGenerarRecibosSinAlquileres() throws NoParcelaException, NoArrendatarioException, NoTerrenoException {
+        assertEquals(aplicacion.generarRecibos("IVA", 5f), 0);
     }
 
     //TODO:crear recibo tests y alquiler

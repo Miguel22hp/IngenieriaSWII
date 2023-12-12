@@ -40,6 +40,14 @@ public class Aplicacion {
         return listaArrendatarios;
     } //TODO: ERROR DBN en Pruebas
 
+    public HashMap<Integer, Recibo> getListaRecibos() {
+        return listaRecibos;
+    }
+
+    public HashMap<Integer, Alquiler> getListaAlquileres() {
+        return listaAlquileres;
+    }
+
     /**
      * Creas la aplicación inicializando los ILF propuestos para el ciclo
      */
@@ -307,7 +315,7 @@ public class Aplicacion {
         }
     }
 
-    public int generarRecibos(String tipoImpuesto, float impuesto) //TODO: Error dbn encontrado código
+    public int generarRecibos(String tipoImpuesto, float impuesto) //TODO: Error dbn encontrado código(parametros)
     {
         Set<Integer> alquileres = listaAlquileres.keySet();
         LocalDateTime fechaHoraActual = LocalDateTime.now();
