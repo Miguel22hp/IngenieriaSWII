@@ -7,9 +7,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Aplicacion {
 
-    protected HashMap<Integer,Terreno> listaTerrenos;
-    protected HashMap<Integer,Parcelas> listaParcelas;
-    public HashMap<String, Arrendatario> listaArrendatarios;
+    protected HashMap<Integer, Terreno> listaTerrenos;
+    protected HashMap<Integer, Parcelas> listaParcelas;
+    protected HashMap<String, Arrendatario> listaArrendatarios;
+
     private int idTerrenos;
     private int idParcela;
     private int idAlquiler;
@@ -322,5 +323,22 @@ public class Aplicacion {
             System.out.println("Recibo creado: " + r);
         }
         return  j;
+    }
+
+    public int addAlquiler(String fechaInicio, String fechaFin, int duracion, float importe, int idParcela, String dniArrendatario) throws NoParcelaException, NoArrendatarioException
+    {
+        if (listaParcelas.get(idParcela) == null)
+            throw new NoParcelaException("No existe la parcela que se quiere alquilar");
+        if (listaArrendatarios.get(dniArrendatario) == null)
+            throw new NoArrendatarioException("No existe el arrendatario que alquila la parcela");
+        Alquiler alquiler = new Alquiler(idAlquiler, fechaInicio, fechaFin, duracion, importe, idParcela, dniArrendatario);
+        idAlquiler++;
+        listaAlquileres.put(alquiler.idAlquiler, alquiler);
+        return alquiler.idAlquiler;
+    }
+
+    public int removeAlquiler(int idAlquiler)
+    {
+        return (listaAlquileres.remove(idAlquiler) != null) ? 1 : -1;
     }
 }

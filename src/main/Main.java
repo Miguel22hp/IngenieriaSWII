@@ -24,6 +24,8 @@ public class Main {
             System.out.println("Añadir un arrendatario: 9");
             System.out.println("Borrar un arrendatario: 10");
             System.out.println("Modificar un arrendatario: 11");
+            System.out.println("Añadir un alquiler: 12");
+            System.out.println("Eliminar un alquiler: 13");
             System.out.println("Generar recibos: 14");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
@@ -84,6 +86,14 @@ public class Main {
                 case 11:
                     System.out.println("Modificar un arrendatario: 11");
                     modificarArrendatario(aplicacion);
+                    break;
+                case 12:
+                    System.out.println("Añadir un alquiler: 12");
+                    anadirAlquiler(aplicacion);
+                    break;
+                case 13:
+                    System.out.println("Eliminar un alquiler: 13");
+                    borrarAlquiler(aplicacion);
                     break;
                 case 14:
                     System.out.println("Generar recibos: 14");
@@ -577,5 +587,43 @@ public class Main {
 
     }
     
-    
+    private static void anadirAlquiler(Aplicacion aplicacion)
+    {
+        //String fechaInicio, String fechaFin, int duracion, float importe, int idParcela, String dniArrendatario
+        System.out.print("Fecha de inicio del alquiler : ");
+        String fechaInicio = in.next();
+        System.out.print("Fecha de fin del alquiler : ");
+        String fechaFin = in.next();
+        System.out.print("Duracion en dias del alquiler : ");
+        int duracion = in.nextInt();
+        System.out.print("Importe del alquiler : ");
+        int importe = in.nextInt();
+        System.out.print("Id de la parcela que se quiere alquilar : ");
+        int idParcela = in.nextInt();
+        System.out.print("Dni del arrendatario que alquila la parcela : ");
+        String dniArrendatario = in.next();
+        
+        try {
+            aplicacion.addAlquiler(fechaInicio, fechaFin, duracion, importe, idParcela, dniArrendatario);
+        } catch (NoArrendatarioException e)
+        {
+            System.out.println("No existe arrendatario con ese id");
+        } catch (NoParcelaException e)
+        {
+            System.out.println("No existe una parcela con ese id");
+        }
+    }
+
+    private static void borrarAlquiler(Aplicacion aplicacion)
+    {
+        System.out.println("Seleccionar el identificador del alquiler que quieres borrar");
+        System.out.print("\tId del alquiler:");
+        int idAlquiler = in.nextInt();
+        int res = aplicacion.removeAlquiler(idAlquiler);
+        if(res == -1)
+            System.out.println("No existe parcela con ese id");
+        else
+            System.out.println("Parcela borrado");
+    }
+
 }
