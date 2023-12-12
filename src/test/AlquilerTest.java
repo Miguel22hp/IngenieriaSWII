@@ -1,9 +1,10 @@
 package test;
 
 import main.Alquiler;
-import main.Parcelas;
-import main.Terreno;
-import main.Ubicacion;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class AlquilerTest {
     Alquiler alquiler;
@@ -20,6 +21,8 @@ public class AlquilerTest {
         assertEquals("01-01-2002", alquiler.getFechaFin());
         assertEquals("01-01-2002", alquiler.getFechaInicio());
         assertEquals(2, alquiler.getIdParcela());
-        assertEquals(1, alquiler.getImporte());
+        float delta = 0.0001f; // Define la tolerancia según tus necesidades
+        assertEquals(1, alquiler.getImporte(),delta);
+        //TODO: delta faltaba, error de código(test) encontrado en pruebas
     }
 }

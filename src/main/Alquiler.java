@@ -17,6 +17,7 @@ public class Alquiler {
         this.fechaInicio = fechaInicio;
         this.idAlquiler = idAlquiler;
         this.importe = importe;
+        this.idParcela = idParcela; //TODO: ERROR código encontrado en pruebas
     }
 
     public String getFechaInicio()

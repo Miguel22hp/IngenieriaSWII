@@ -498,47 +498,47 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
     {
 
         aplicacion.modArrendatario(new int[]{0,0,0},"1234P",21,'M',"Aval");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),21);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'M');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Aval");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),21);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval");
     }
 
     @Test
     public void modificarParametrosSueltosArrendatario()
     {
         aplicacion.modArrendatario(new int[]{0,1,1},"1234P",21,'H',"Aval");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),21);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'H');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Avalado por Banco");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),21);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'H');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Avalado por Banco");
 
         aplicacion.modArrendatario(new int[]{1,0,1},"1234P",13,'M',"Aval");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),21);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'M');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Avalado por Banco");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),21);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Avalado por Banco");
 
         aplicacion.modArrendatario(new int[]{1,1,0},"1234P",13,'M',"Aval");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),21);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'M');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Aval");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),21);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval");
 
         aplicacion.modArrendatario(new int[]{0,0,1},"1234P",28,'H',"Aval2");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),28);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'H');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Aval");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),28);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'H');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval");
 
         aplicacion.modArrendatario(new int[]{1,0,0},"1234P",13,'M',"Aval2");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),28);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'M');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Aval2");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),28);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval2");
 
         aplicacion.modArrendatario(new int[]{0,1,0},"1234P",13,'M',"Aval3");
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getEdad(),13);
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getSexo(),'M');
-        assertEquals(aplicacion.listaArrendatarios.get("1234P").getAval(),"Aval3");
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),13);
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
+        assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval3");
 
 
     }
 
-    //TODO:crear recibo tests
+    //TODO:crear recibo tests y alquiler
 
 }

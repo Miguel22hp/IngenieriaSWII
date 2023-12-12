@@ -36,6 +36,10 @@ public class Aplicacion {
         return listaParcelas;
     }
 
+    public HashMap<String, Arrendatario> getListaArrendatarios() {
+        return listaArrendatarios;
+    } //TODO: ERROR DBN en Pruebas
+
     /**
      * Creas la aplicación inicializando los ILF propuestos para el ciclo
      */
