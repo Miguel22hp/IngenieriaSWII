@@ -501,6 +501,7 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getEdad(),21);
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval");
+
     }
 
     @Test
@@ -536,9 +537,9 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getSexo(),'M');
         assertEquals(aplicacion.getListaArrendatarios().get("1234P").getAval(),"Aval3");
 
-
     }
 
     //TODO:crear recibo tests y alquiler
+
 
 }
