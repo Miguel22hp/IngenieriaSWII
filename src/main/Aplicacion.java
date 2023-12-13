@@ -328,7 +328,7 @@ public class Aplicacion {
         for(Integer i: alquileres)
         {
             Alquiler a = listaAlquileres.get(i);
-            Recibo r = new Recibo(idRecibo, fechaFormateada, a.importe, tipoImpuesto, impuesto, false, a.idAlquiler);
+            Recibo r = new Recibo(idRecibo, fechaFormateada, a.getImporte(), tipoImpuesto, impuesto, false, a.getId()); //TODO no habia getter de id del alquiler, error del dbn encontrado en el codigo
             listaRecibos.put(idRecibo,r);
             idRecibo++;
             j++;
@@ -346,11 +346,20 @@ public class Aplicacion {
         Alquiler alquiler = new Alquiler(idAlquiler, fechaInicio, fechaFin, duracion, importe, idParcela, dniArrendatario);
         idAlquiler++;
         listaAlquileres.put(alquiler.idAlquiler, alquiler);
+        listaArrendatarios.get(dniArrendatario).addAlquiler(alquiler);
         return alquiler.idAlquiler;
     }
 
     public int removeAlquiler(int idAlquiler)
     {
         return (listaAlquileres.remove(idAlquiler) != null) ? 1 : -1;
+    }
+
+    public boolean pagarRecibo(int numRecibo)
+    {
+        if (listaRecibos.get(numRecibo) == null)
+            return false;
+        listaRecibos.get(numRecibo).pagado();
+        return true;
     }
 }
