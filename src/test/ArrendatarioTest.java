@@ -33,7 +33,12 @@ public class ArrendatarioTest {
     @Test
     public void addAlquiler()
     {
-
+        Alquiler alquiler1 = new Alquiler(1,"2023-08-01","2024-08-01",366,123.1F, 1, "1234P");
+        assertEquals(arrendatario1.getAlquileres().size(),0);
+        arrendatario1.addAlquiler(alquiler1);
+        assertEquals(arrendatario1.getAlquileres().size(),1);
+        Integer[] listaID = {1};
+        assertArrayEquals(arrendatario1.getAlquileres().toArray(),listaID);
     }
 
     @Test
