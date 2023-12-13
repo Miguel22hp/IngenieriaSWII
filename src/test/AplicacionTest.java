@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -582,22 +583,46 @@ public void addParcelaReturn() throws NoParcelaException, NoTerrenoException {
     //TODO:crear recibo tests y alquiler
 
     @Test
-    public void testAlquilerDeArrendatario()
-    {
+    public void testAlquilerDeArrendatario() throws NoParcelaException, NoArrendatarioException {
+        aplicacion.addArrendatario("1235P", 33, 'H',"Avalado por Banco");
         int id = aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
-        assertEquals(aplicacion.getListaAlquileres().get(id), aplicacion.getListaArrendatarios().get("1235P").getAlquileres().get(0));
+        Alquiler a = new Alquiler(1,"01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
+        assertEquals(Optional.of(aplicacion.getListaAlquileres().get(id).getId()), Optional.of(aplicacion.getListaArrendatarios().get("1235P").getAlquileres().get(0)));
+        assertEquals(aplicacion.getListaAlquileres().get(id).getId(),id);
+        System.out.println();
+        assertEquals(a.toString(),aplicacion.getListaAlquileres().get(id).toString());
     }
 
     @Test
-    public void testPagarRecibo()
-    {
+    public void anadirAlquilerSinParcelaNiArrendatatrio() throws NoParcelaException, NoArrendatarioException {
+        assertThrows(NoArrendatarioException.class, () -> {
+            aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
+        });
+        assertThrows(NoParcelaException.class, () -> {
+            aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 99, "1235P");
+        });
+    }
+
+    @Test
+    public void removeAlquiler()  throws NoParcelaException, NoArrendatarioException {
+        aplicacion.addArrendatario("1235P", 33, 'H',"Avalado por Banco");
+        int id = aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
+        assertEquals(1, aplicacion.getListaAlquileres().size());
+        aplicacion.removeAlquiler(id);
+        assertEquals(0, aplicacion.getListaAlquileres().size());
+    }
+    @Test
+    public void testPagarRecibo() throws NoTerrenoException, NoParcelaException, NoArrendatarioException {
+        aplicacion.addArrendatario("1235P", 33, 'H',"Avalado por Banco");
         aplicacion.addParcela(1, new Ubicacion[]{new Ubicacion(16,16), new Ubicacion(12,14),
                 new Ubicacion(14,12), new Ubicacion(14,14)}, new Ubicacion(50,50));
         aplicacion.addAlquiler("01-01-2002", "01-01-2002", 1, 1, 1, "1235P");
 
         aplicacion.generarRecibos("IVA", 5f);
-        aplicacion.pagarRecibo(aplicacion.getListaRecibos().get(0).getNumRecibo());
-        assertTrue(aplicacion.getListaRecibos().get(0).isPagado());
+        assertTrue(aplicacion.pagarRecibo(aplicacion.getListaRecibos().get(1).getNumRecibo()));
+        assertTrue(aplicacion.getListaRecibos().get(1).isPagado());
+
+        assertFalse(aplicacion.pagarRecibo(3));
     }
 
 }

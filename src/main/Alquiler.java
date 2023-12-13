@@ -20,6 +20,19 @@ public class Alquiler {
         this.idParcela = idParcela; //TODO: ERROR código encontrado en pruebas
     }
 
+    @Override
+    public String toString() {
+        return "Alquiler{" +
+                "idAlquiler=" + idAlquiler +
+                ", fechaInicio='" + fechaInicio + '\'' +
+                ", fechaFin='" + fechaFin + '\'' +
+                ", duracion=" + duracion +
+                ", importe=" + importe +
+                ", dniArrendatario='" + dniArrendatario + '\'' +
+                ", idParcela=" + idParcela +
+                '}';
+    }
+
     public String getFechaInicio()
     {
         return fechaInicio;
