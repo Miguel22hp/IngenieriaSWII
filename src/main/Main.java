@@ -1,5 +1,6 @@
 package main;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
@@ -28,6 +29,7 @@ public class Main {
             System.out.println("Eliminar un alquiler: 13");
             System.out.println("Generar recibos: 14");
             System.out.println("Pagar recibos: 15");
+            System.out.println("Ver recibos: 16");
             System.out.println("Escribe la operación que deseas hacer a continuación:");
 
             int operacionSeleccionada = in.nextInt();
@@ -103,6 +105,12 @@ public class Main {
                 case 15:
                     System.out.println("Pagar recibos: 15");
                     pagarRecibo(aplicacion);
+                    break;
+                case 16:
+                    System.out.println("Ver recibos: 16");
+                    verRecibos(aplicacion);
+                    break;
+
 
                 default:
                     System.out.println("No hay operación asociada");
@@ -114,6 +122,14 @@ public class Main {
         }
 
         
+    }
+
+    private static void verRecibos(Aplicacion aplicacion)
+    {
+        for(Map.Entry<Integer,Recibo> entry: aplicacion.getListaRecibos().entrySet())
+        {
+            System.out.println(entry.getValue());
+        }
     }
 
     private static void generarRecibo(Aplicacion aplicacion) {
@@ -161,11 +177,12 @@ public class Main {
         }
         System.out.println("Aval del arrendatario:");
         int avalM = in.nextInt();
+        in.nextLine();
         String aval = "";
         if(avalM == 0)
         {
             System.out.println("Introduce el nuevo aval del arrendatario:");
-            aval = in.next();
+            aval = in.nextLine(); //TODO: Fallo en código nextLine detectado en pruebas
         }
 
         int[] array = {edadM,sexoM,avalM};
@@ -197,9 +214,11 @@ public class Main {
 
         System.out.print("Introduce el sexo del arrendatario, con una H para hombre y una M para mujer: ");
         char sexo = in.next().charAt(0);
+        in.nextLine();
 
         System.out.println("Introduce el aval del arrendatario: ");
-        String aval = in.next();
+        String aval = in.nextLine();
+        //TODO: Fallo en código nextLine detectado en pruebas
 
         String arrendatarioCreado = aplicacion.addArrendatario(dni,edad,sexo,aval);
         if(arrendatarioCreado == null)
@@ -387,7 +406,7 @@ public class Main {
                             System.out.print(limites2[i].toString());
                         System.out.println("]");
                     }
-                    System.out.println("---------------Fin de datos de terreno con id = " + idParcela2 + " ------------------");
+                    System.out.println("---------------Fin de datos de parcela con id = " + idParcela2 + " ------------------");
                 }catch (NoParcelaException e) {
                     System.out.println("No existe parcela con tal identificador");
                 }
@@ -397,7 +416,7 @@ public class Main {
         {
             try {
                 Object[] datosParcela = aplicacion.getParcela(array, idParcela); //Obtienes los datos. Debería de cazarse una excepción
-                System.out.println("---------------Datos de terreno con id = " + idParcela + " ------------------");
+                System.out.println("---------------Datos de parcela con id = " + idParcela + " ------------------");
                 if (datosParcela[1] != null)
                     System.out.println("-> Ubicación = " + datosParcela[1].toString());
                 if (datosParcela[0] != null) {
@@ -407,7 +426,7 @@ public class Main {
                         System.out.print(limites2[i].toString());
                     System.out.println("]");
                 }
-                System.out.println("---------------Fin de datos de terreno con id = " + idParcela + " ------------------");
+                System.out.println("---------------Fin de datos de parcela con id = " + idParcela + " ------------------");
             }catch (NoParcelaException e) {
                 System.out.println("No existe parcela con tal identificador");
             }
@@ -592,22 +611,35 @@ public class Main {
     
     private static void anadirAlquiler(Aplicacion aplicacion)
     {
-        //String fechaInicio, String fechaFin, int duracion, float importe, int idParcela, String dniArrendatario
-        System.out.print("Fecha de inicio del alquiler : ");
-        String fechaInicio = in.next();
-        System.out.print("Fecha de fin del alquiler : ");
-        String fechaFin = in.next();
+        System.out.println("Fecha de inicio del alquiler : ");
+        System.out.print("Año : ");
+        int anio = in.nextInt();
+        System.out.print("Mes : ");
+        int mes = in.nextInt();
+        System.out.print("Día : ");
+        int dia = in.nextInt();
+        String fechaInicio = anio +"-"+ mes +"-"+ dia;
+        System.out.println("Fecha de fin del alquiler : ");
+        System.out.print("Año : ");
+        anio = in.nextInt();
+        System.out.print("Mes : ");
+        mes = in.nextInt();
+        System.out.print("Día : ");
+        dia = in.nextInt();
+        String fechaFin = anio +"-"+ mes +"-"+ dia;
         System.out.print("Duracion en dias del alquiler : ");
         int duracion = in.nextInt();
-        System.out.print("Importe del alquiler : ");
-        int importe = in.nextInt();
+        System.out.print("Importe del alquiler (Usar coma para los decimales): ");
+        float importe = in.nextFloat(); //TODO:  FAllo en codigo detectado en pruebas
         System.out.print("Id de la parcela que se quiere alquilar : ");
         int idParcela = in.nextInt();
         System.out.print("Dni del arrendatario que alquila la parcela : ");
         String dniArrendatario = in.next();
         
         try {
-            aplicacion.addAlquiler(fechaInicio, fechaFin, duracion, importe, idParcela, dniArrendatario);
+            System.out.println(" Se ha creado un alquiler de la parcela "+ idParcela + ", alquilada por el arrendatario " +
+                    "cuyo dni es " + dniArrendatario + ". EL identificador de este alquiler es: "
+                    +aplicacion.addAlquiler(fechaInicio, fechaFin, duracion, importe, idParcela, dniArrendatario));
         } catch (NoArrendatarioException e)
         {
             System.out.println("No existe arrendatario con ese id");

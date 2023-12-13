@@ -347,6 +347,7 @@ public class Aplicacion {
         idAlquiler++;
         listaAlquileres.put(alquiler.idAlquiler, alquiler);
         listaArrendatarios.get(dniArrendatario).addAlquiler(alquiler);
+        System.out.println(alquiler.toString());
         return alquiler.idAlquiler;
     }
 
