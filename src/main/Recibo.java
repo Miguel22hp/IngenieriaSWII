@@ -62,5 +62,5 @@ public class Recibo {
 
     public int getIdAlquiler() {
         return idAlquiler;
-    }
+    } //TODO:Error DBN detectado en pruebas/código
 }

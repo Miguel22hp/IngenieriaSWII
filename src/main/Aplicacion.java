@@ -42,11 +42,11 @@ public class Aplicacion {
 
     public HashMap<Integer, Recibo> getListaRecibos() {
         return listaRecibos;
-    }
+    } //TODO: ERROR DBN en Pruebas
 
     public HashMap<Integer, Alquiler> getListaAlquileres() {
         return listaAlquileres;
-    }
+    } //TODO: ERROR DBN en Pruebas
 
     /**
      * Creas la aplicación inicializando los ILF propuestos para el ciclo
