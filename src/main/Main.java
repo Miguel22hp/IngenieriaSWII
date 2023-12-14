@@ -169,7 +169,7 @@ public class Main {
         }
         System.out.println("Sexo del arrendatario:");
         int sexoM = in.nextInt();
-        char sexo = ' '; //TODO: ERROR AL INICIALIZAR CHAR CORREGIDO EN PRUEBAS
+        char sexo = ' ';
         if(sexoM == 0)
         {
             System.out.println("Introduce el nuevo sexo del arrendatario:");
@@ -182,7 +182,7 @@ public class Main {
         if(avalM == 0)
         {
             System.out.println("Introduce el nuevo aval del arrendatario:");
-            aval = in.nextLine(); //TODO: Fallo en código nextLine detectado en pruebas
+            aval = in.nextLine();
         }
 
         int[] array = {edadM,sexoM,avalM};
@@ -218,7 +218,7 @@ public class Main {
 
         System.out.println("Introduce el aval del arrendatario: ");
         String aval = in.nextLine();
-        //TODO: Fallo en código nextLine detectado en pruebas
+
 
         String arrendatarioCreado = aplicacion.addArrendatario(dni,edad,sexo,aval);
         if(arrendatarioCreado == null)
@@ -630,7 +630,7 @@ public class Main {
         System.out.print("Duracion en dias del alquiler : ");
         int duracion = in.nextInt();
         System.out.print("Importe del alquiler (Usar coma para los decimales): ");
-        float importe = in.nextFloat(); //TODO:  FAllo en codigo detectado en pruebas
+        float importe = in.nextFloat();
         System.out.print("Id de la parcela que se quiere alquilar : ");
         int idParcela = in.nextInt();
         System.out.print("Dni del arrendatario que alquila la parcela : ");

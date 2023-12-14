@@ -38,15 +38,15 @@ public class Aplicacion {
 
     public HashMap<String, Arrendatario> getListaArrendatarios() {
         return listaArrendatarios;
-    } //TODO: ERROR DBN en Pruebas
+    }
 
     public HashMap<Integer, Recibo> getListaRecibos() {
         return listaRecibos;
-    } //TODO: ERROR DBN en Pruebas
+    }
 
     public HashMap<Integer, Alquiler> getListaAlquileres() {
         return listaAlquileres;
-    } //TODO: ERROR DBN en Pruebas
+    }
 
     /**
      * Creas la aplicación inicializando los ILF propuestos para el ciclo
@@ -315,7 +315,7 @@ public class Aplicacion {
         }
     }
 
-    public int generarRecibos(String tipoImpuesto, float impuesto) //TODO: Error dbn encontrado código(parametros)
+    public int generarRecibos(String tipoImpuesto, float impuesto)
     {
         Set<Integer> alquileres = listaAlquileres.keySet();
         LocalDateTime fechaHoraActual = LocalDateTime.now();
@@ -328,7 +328,7 @@ public class Aplicacion {
         for(Integer i: alquileres)
         {
             Alquiler a = listaAlquileres.get(i);
-            Recibo r = new Recibo(idRecibo, fechaFormateada, a.getImporte(), tipoImpuesto, impuesto, false, a.getId()); //TODO no habia getter de id del alquiler, error del dbn encontrado en el codigo
+            Recibo r = new Recibo(idRecibo, fechaFormateada, a.getImporte(), tipoImpuesto, impuesto, false, a.getId());
             listaRecibos.put(idRecibo,r);
             idRecibo++;
             j++;
